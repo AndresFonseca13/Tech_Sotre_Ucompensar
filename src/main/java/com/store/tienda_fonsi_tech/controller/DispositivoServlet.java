@@ -13,7 +13,6 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
-// Esta anotación define la URL. Cuando se entre a /catalogo, se ejecuta esto.
 @WebServlet(name = "DispositivoServlet", value = "/catalogo")
 public class DispositivoServlet extends HttpServlet {
 
@@ -57,7 +56,6 @@ public class DispositivoServlet extends HttpServlet {
 
             request.setAttribute("dispositivos", lista);
 
-            // Reenviamos los parámetros para mantener los filtros seleccionados en la vista
             request.setAttribute("paramBusqueda", busqueda);
             request.setAttribute("paramMarca", marca);
             request.setAttribute("paramTipo", categoria);

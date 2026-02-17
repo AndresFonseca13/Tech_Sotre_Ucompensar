@@ -112,11 +112,9 @@ public class DispositivoDAO {
     public List<Dispositivo> filtrar(String textoBusqueda, String marcaId, String categoriaId) {
         List<Dispositivo> dispositivos = new ArrayList<>();
 
-        // 1.  concatenar condiciones fácilmente
         StringBuilder sql = new StringBuilder("SELECT * FROM dispositivos WHERE 1=1");
         List<Object> parametros = new ArrayList<>();
 
-        // 2. Agregar condiciones dinámicamente
         if (textoBusqueda != null && !textoBusqueda.trim().isEmpty()) {
             sql.append(" AND nombre LIKE ?");
             parametros.add("%" + textoBusqueda + "%"); // Búsqueda parcial
@@ -132,14 +130,11 @@ public class DispositivoDAO {
             parametros.add(Integer.parseInt(categoriaId));
         }
 
-        // Ordenar por fecha
         sql.append(" ORDER BY fecha_lanzamiento DESC");
 
-        // 3. Ejecutar consulta
         try (Connection conn = DatabaseConnection.getInstance();
              PreparedStatement stmt = conn.prepareStatement(sql.toString())) {
 
-            // Asignar los ? del PreparedStatement
             for (int i = 0; i < parametros.size(); i++) {
                 stmt.setObject(i + 1, parametros.get(i));
             }
@@ -165,7 +160,6 @@ public class DispositivoDAO {
         return dispositivos;
     }
 
-    // 1. INSERTAR (Crear nuevo)
     public boolean insertar(Dispositivo d) {
         String sql = "INSERT INTO dispositivos (nombre, descripcion, imagen_url, precio, fecha_lanzamiento, especificaciones, categoria_id, marca_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         try (Connection conn = DatabaseConnection.getInstance();
@@ -175,7 +169,7 @@ public class DispositivoDAO {
             stmt.setString(2, d.getDescripcion());
             stmt.setString(3, d.getImagenUrl());
             stmt.setDouble(4, d.getPrecio());
-            stmt.setDate(5, (Date) d.getFechaLanzamiento()); // java.sql.Date
+            stmt.setDate(5, (Date) d.getFechaLanzamiento());
             stmt.setString(6, d.getEspecificaciones());
             stmt.setInt(7, d.getCategoriaId());
             stmt.setInt(8, d.getMarcaId());
@@ -187,7 +181,6 @@ public class DispositivoDAO {
         }
     }
 
-    // 2. ACTUALIZAR (Editar existente)
     public boolean actualizar(Dispositivo d) {
         String sql = "UPDATE dispositivos SET nombre=?, descripcion=?, imagen_url=?, precio=?, fecha_lanzamiento=?, especificaciones=?, categoria_id=?, marca_id=? WHERE id=?";
         try (Connection conn = DatabaseConnection.getInstance();
@@ -210,7 +203,6 @@ public class DispositivoDAO {
         }
     }
 
-    // 3. ELIMINAR
     public boolean eliminar(int id) {
         String sql = "DELETE FROM dispositivos WHERE id=?";
         try (Connection conn = DatabaseConnection.getInstance();

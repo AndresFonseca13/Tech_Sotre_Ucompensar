@@ -24,7 +24,7 @@ public class DetalleServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // 1. Obtener el ID que viene en la URL (ej: /detalle?id=1)
+        // 1. Obtener el ID que viene en la URL
         String idParam = request.getParameter("id");
 
         if (idParam != null && !idParam.isEmpty()) {
@@ -35,7 +35,7 @@ public class DetalleServlet extends HttpServlet {
                 Dispositivo dispositivo = dispositivoDAO.obtenerPorId(id);
 
                 if (dispositivo != null) {
-                    //Cargar los comentarios de este dispositivo
+                    // Cargar los comentarios de este dispositivo
                     List<Comentario> comentarios = dispositivoDAO.listarComentarios(id);
                     request.setAttribute("comentarios", comentarios); // Enviarlos al JSP
 
@@ -44,11 +44,11 @@ public class DetalleServlet extends HttpServlet {
                     return;
                 }
             } catch (NumberFormatException e) {
-                // El ID no era un número válido
+                System.out.print("Numero de Id invalido");
             }
         }
 
-        // Si no se encuentra el ID o el dispositivo, redirigir al catálogo
+
         response.sendRedirect("catalogo");
     }
 }

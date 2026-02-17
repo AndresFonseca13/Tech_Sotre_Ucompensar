@@ -1,0 +1,135 @@
+/* ============================================
+   TechStore - Estilos comunes
+   ============================================ */
+
+* {
+    font-family: 'Inter', sans-serif;
+}
+
+body {
+    background-color: #f0f2f5;
+}
+
+/* --- Navbar base (tienda pública) --- */
+.ts-navbar {
+    background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 0.6rem 0;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+    position: sticky;
+    top: 0;
+    z-index: 1050;
+    backdrop-filter: blur(12px);
+}
+
+/* Brand / Logo */
+.ts-brand {
+    font-weight: 700;
+    font-size: 1.4rem;
+    color: #fff !important;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    letter-spacing: -0.5px;
+}
+
+.ts-brand .brand-icon {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+}
+
+.ts-brand:hover {
+    opacity: 0.9;
+}
+
+/* Botón genérico glass */
+.ts-btn-ghost {
+    background: rgba(255, 255, 255, 0.08);
+    color: rgba(255, 255, 255, 0.85);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 10px;
+    padding: 0.45rem 1.1rem;
+    font-size: 0.85rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+.ts-btn-ghost:hover {
+    background: rgba(255, 255, 255, 0.15);
+    color: #fff;
+    border-color: rgba(255, 255, 255, 0.25);
+}
+
+/* Toggler */
+.ts-navbar .navbar-toggler,
+.ts-navbar-admin .navbar-toggler {
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 10px;
+    padding: 0.4rem 0.7rem;
+}
+
+.ts-navbar .navbar-toggler:focus,
+.ts-navbar-admin .navbar-toggler:focus {
+    box-shadow: none;
+}
+
+/* --- Navbar admin --- */
+.ts-navbar-admin {
+    background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 0.6rem 0;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+    position: sticky;
+    top: 0;
+    z-index: 1050;
+    backdrop-filter: blur(12px);
+}
+
+.ts-brand-admin {
+    font-weight: 700;
+    font-size: 1.3rem;
+    color: #fff !important;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    letter-spacing: -0.5px;
+}
+
+.ts-brand-admin .brand-icon {
+    background: linear-gradient(135deg, #e94560, #c23152);
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    color: #fff;
+}
+
+.ts-brand-admin .badge-admin {
+    background: rgba(233, 69, 96, 0.15);
+    color: #e94560;
+    font-size: 0.65rem;
+    padding: 0.2rem 0.5rem;
+    border-radius: 6px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.ts-brand-admin:hover {
+    opacity: 0.9;
+}

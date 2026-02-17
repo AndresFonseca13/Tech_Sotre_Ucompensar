@@ -1,0 +1,548 @@
+/* ============================================
+   TechStore - Página de detalle
+   ============================================ */
+
+.ts-btn-back {
+    background: rgba(255, 255, 255, 0.08);
+    color: rgba(255, 255, 255, 0.85);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 10px;
+    padding: 0.45rem 1.1rem;
+    font-size: 0.85rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+.ts-btn-back:hover {
+    background: rgba(255, 255, 255, 0.15);
+    color: #fff;
+    border-color: rgba(255, 255, 255, 0.25);
+    transform: translateX(-2px);
+}
+
+/* --- Contenedor principal del producto --- */
+.product-detail-wrapper {
+    margin-top: 2rem;
+    margin-bottom: 3rem;
+}
+
+/* --- Imagen del producto --- */
+.product-image-container {
+    position: sticky;
+    top: 100px;
+}
+
+.product-image-bg {
+    background: linear-gradient(135deg, #f8f9ff, #eef1f8);
+    border-radius: 20px;
+    padding: 2.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 500px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+}
+
+.product-image-bg::before {
+    content: '';
+    position: absolute;
+    top: -50px;
+    right: -50px;
+    width: 200px;
+    height: 200px;
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1));
+    border-radius: 50%;
+}
+
+.product-image-bg::after {
+    content: '';
+    position: absolute;
+    bottom: -30px;
+    left: -30px;
+    width: 150px;
+    height: 150px;
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.08), rgba(118, 75, 162, 0.08));
+    border-radius: 50%;
+}
+
+.product-main-image {
+    max-width: 100%;
+    max-height: 450px;
+    object-fit: contain;
+    position: relative;
+    z-index: 1;
+    transition: transform 0.4s ease;
+}
+
+.product-image-container:hover .product-main-image {
+    transform: scale(1.05);
+}
+
+/* --- Información del producto --- */
+.product-info {
+    padding-left: 1.5rem;
+}
+
+.product-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1));
+    color: #667eea;
+    padding: 0.4rem 1rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+.product-badge i {
+    font-size: 0.7rem;
+}
+
+.product-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #1a1a2e;
+    margin-bottom: 1.5rem;
+    letter-spacing: -0.8px;
+    line-height: 1.2;
+}
+
+/* --- Precio --- */
+.product-price-section {
+    margin-bottom: 2rem;
+    padding: 1.5rem;
+    background: linear-gradient(135deg, #f8f9ff, #ffffff);
+    border-radius: 16px;
+    border: 1px solid rgba(102, 126, 234, 0.1);
+}
+
+.price-label {
+    display: block;
+    font-size: 0.85rem;
+    color: #6b7280;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.product-price {
+    font-size: 2.5rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1;
+}
+
+.product-price .currency {
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+/* --- Descripción --- */
+.product-description {
+    margin-bottom: 2rem;
+}
+
+.product-description p {
+    font-size: 1.05rem;
+    color: #4b5563;
+    line-height: 1.7;
+    margin: 0;
+}
+
+/* --- Especificaciones --- */
+.product-specs {
+    margin-bottom: 2rem;
+    padding: 1.5rem;
+    background: #fff;
+    border-radius: 16px;
+    border: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.specs-title {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #1a1a2e;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.specs-title i {
+    color: #667eea;
+    font-size: 1.1rem;
+}
+
+.specs-content {
+    margin-bottom: 1rem;
+}
+
+.specs-content p {
+    color: #4b5563;
+    line-height: 1.6;
+    margin: 0;
+}
+
+.product-meta {
+    padding-top: 1rem;
+    border-top: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.meta-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.9rem;
+    color: #6b7280;
+}
+
+.meta-item i {
+    color: #667eea;
+}
+
+/* --- Botones de acción --- */
+.product-actions {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.ts-btn-buy {
+    flex: 1;
+    min-width: 200px;
+    padding: 1rem 2rem;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: #fff;
+    border: none;
+    border-radius: 12px;
+    font-size: 1rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.ts-btn-buy:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+    color: #fff;
+}
+
+.ts-btn-wishlist {
+    padding: 1rem 1.5rem;
+    background: #fff;
+    color: #667eea;
+    border: 2px solid #667eea;
+    border-radius: 12px;
+    font-size: 1rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.ts-btn-wishlist:hover {
+    background: #667eea;
+    color: #fff;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.3);
+}
+
+/* --- Sección de comentarios --- */
+.reviews-section {
+    margin-top: 4rem;
+    margin-bottom: 3rem;
+}
+
+.reviews-header {
+    margin-bottom: 2rem;
+}
+
+.reviews-title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #1a1a2e;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    letter-spacing: -0.5px;
+}
+
+.reviews-title i {
+    color: #667eea;
+    font-size: 1.8rem;
+}
+
+/* --- Formulario de comentario --- */
+.review-form-card {
+    background: #fff;
+    border-radius: 16px;
+    padding: 2rem;
+    margin-bottom: 2.5rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+    border: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.review-form-title {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #1a1a2e;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.review-form-title i {
+    color: #667eea;
+}
+
+.form-group {
+    margin-bottom: 1rem;
+}
+
+.form-label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #374151;
+    margin-bottom: 0.5rem;
+}
+
+.form-label i {
+    color: #667eea;
+    font-size: 0.85rem;
+}
+
+.form-control-modern {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 2px solid rgba(0, 0, 0, 0.08);
+    border-radius: 10px;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+    background: #fff;
+    color: #1a1a2e;
+}
+
+.form-control-modern:focus {
+    outline: none;
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.form-control-modern::placeholder {
+    color: #9ca3af;
+}
+
+.ts-btn-submit-review {
+    margin-top: 1rem;
+    padding: 0.85rem 2rem;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.ts-btn-submit-review:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+    color: #fff;
+}
+
+/* --- Lista de comentarios --- */
+.reviews-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+.reviews-empty {
+    text-align: center;
+    padding: 3rem 2rem;
+    background: #fff;
+    border-radius: 16px;
+    border: 2px dashed rgba(0, 0, 0, 0.08);
+}
+
+.reviews-empty i {
+    font-size: 3rem;
+    color: #9ca3af;
+    margin-bottom: 1rem;
+}
+
+.reviews-empty p {
+    color: #6b7280;
+    font-size: 1rem;
+    margin: 0;
+}
+
+.review-card {
+    background: #fff;
+    border-radius: 16px;
+    padding: 1.5rem;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    transition: all 0.3s ease;
+}
+
+.review-card:hover {
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    transform: translateY(-2px);
+}
+
+.review-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.review-author {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex: 1;
+}
+
+.author-avatar {
+    width: 48px;
+    height: 48px;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 1.5rem;
+}
+
+.author-info {
+    flex: 1;
+}
+
+.author-name {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #1a1a2e;
+    margin: 0 0 0.25rem 0;
+}
+
+.review-date {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.85rem;
+    color: #6b7280;
+}
+
+.review-date i {
+    font-size: 0.75rem;
+}
+
+.review-rating {
+    display: flex;
+    gap: 0.2rem;
+    align-items: center;
+}
+
+.review-rating i {
+    font-size: 1.1rem;
+    color: #fbbf24;
+}
+
+.review-rating i.bi-star {
+    color: #d1d5db;
+}
+
+.review-content {
+    margin-top: 0.75rem;
+}
+
+.review-content p {
+    color: #4b5563;
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* --- Responsive --- */
+@media (max-width: 991.98px) {
+    .product-info {
+        padding-left: 0;
+        margin-top: 2rem;
+    }
+
+    .product-image-container {
+        position: relative;
+        top: 0;
+    }
+
+    .product-image-bg {
+        min-height: 350px;
+    }
+
+    .product-title {
+        font-size: 2rem;
+    }
+
+    .product-price {
+        font-size: 2rem;
+    }
+
+    .product-actions {
+        flex-direction: column;
+    }
+
+    .ts-btn-buy,
+    .ts-btn-wishlist {
+        width: 100%;
+    }
+}
+
+@media (max-width: 575.98px) {
+    .product-title {
+        font-size: 1.75rem;
+    }
+
+    .product-price {
+        font-size: 1.75rem;
+    }
+
+    .reviews-title {
+        font-size: 1.5rem;
+    }
+
+    .review-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}

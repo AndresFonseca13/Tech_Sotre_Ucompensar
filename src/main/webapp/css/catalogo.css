@@ -1,0 +1,306 @@
+/* ============================================
+   TechStore - Catálogo (filtros + cards)
+   ============================================ */
+
+/* --- Filtros en navbar --- */
+.search-wrapper {
+    position: relative;
+}
+
+.search-wrapper .bi-search {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: rgba(255, 255, 255, 0.4);
+    font-size: 0.85rem;
+    pointer-events: none;
+}
+
+.ts-search {
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 12px;
+    color: #fff;
+    padding: 0.5rem 1rem 0.5rem 2.5rem;
+    font-size: 0.875rem;
+    transition: all 0.3s ease;
+    width: 220px;
+}
+
+.ts-search::placeholder {
+    color: rgba(255, 255, 255, 0.45);
+}
+
+.ts-search:focus {
+    background: rgba(255, 255, 255, 0.14);
+    border-color: rgba(102, 126, 234, 0.6);
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.15);
+    outline: none;
+    color: #fff;
+    width: 280px;
+}
+
+.ts-select {
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 10px;
+    color: #fff;
+    padding: 0.45rem 2rem 0.45rem 0.75rem;
+    font-size: 0.8rem;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    appearance: auto;
+    min-width: 130px;
+}
+
+.ts-select option {
+    background: #1a1a2e;
+    color: #fff;
+}
+
+.ts-select:focus {
+    border-color: rgba(102, 126, 234, 0.6);
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.15);
+    outline: none;
+}
+
+.ts-btn-filter {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    padding: 0.45rem 1.2rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+.ts-btn-filter:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+    color: #fff;
+}
+
+.ts-btn-clear {
+    background: rgba(255, 255, 255, 0.06);
+    color: rgba(255, 255, 255, 0.65);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    padding: 0.45rem 1rem;
+    font-size: 0.8rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+}
+
+.ts-btn-clear:hover {
+    background: rgba(255, 255, 255, 0.12);
+    color: #fff;
+}
+
+.ts-btn-admin {
+    background: rgba(255, 255, 255, 0.08);
+    color: rgba(255, 255, 255, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 10px;
+    padding: 0.45rem 1rem;
+    font-size: 0.8rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+.ts-btn-admin:hover {
+    background: rgba(255, 255, 255, 0.15);
+    color: #fff;
+    border-color: rgba(255, 255, 255, 0.25);
+}
+
+.filter-divider {
+    width: 1px;
+    height: 28px;
+    background: rgba(255, 255, 255, 0.12);
+    margin: 0 0.3rem;
+}
+
+/* --- Título de sección --- */
+.catalogo-title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #1a1a2e;
+    letter-spacing: -0.5px;
+}
+
+.catalogo-title .title-accent {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* --- Cards de productos --- */
+.ts-product-card {
+    background: #fff;
+    border: none;
+    border-radius: 16px;
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+    position: relative;
+}
+
+.ts-product-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+}
+
+.ts-product-card .card-img-wrapper {
+    background: linear-gradient(135deg, #f8f9ff, #eef1f8);
+    padding: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 220px;
+    position: relative;
+    overflow: hidden;
+}
+
+.ts-product-card .card-img-wrapper::before {
+    content: '';
+    position: absolute;
+    top: -30px;
+    right: -30px;
+    width: 100px;
+    height: 100px;
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.08), rgba(118, 75, 162, 0.08));
+    border-radius: 50%;
+}
+
+.ts-product-card .card-img-wrapper img {
+    max-height: 180px;
+    max-width: 100%;
+    object-fit: contain;
+    transition: transform 0.4s ease;
+}
+
+.ts-product-card:hover .card-img-wrapper img {
+    transform: scale(1.05);
+}
+
+.ts-product-card .card-body {
+    padding: 1.25rem 1.5rem 0.5rem;
+}
+
+.ts-product-card .product-name {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: #1a1a2e;
+    margin-bottom: 0.4rem;
+    letter-spacing: -0.3px;
+    line-height: 1.3;
+}
+
+.ts-product-card .product-desc {
+    font-size: 0.82rem;
+    color: #6b7280;
+    line-height: 1.5;
+    margin-bottom: 0.75rem;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.ts-product-card .product-price {
+    font-size: 1.35rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 0;
+}
+
+.ts-product-card .product-price .currency {
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+.ts-product-card .card-footer {
+    background: transparent;
+    border-top: none;
+    padding: 0.75rem 1.5rem 1.25rem;
+}
+
+.ts-btn-details {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    width: 100%;
+    padding: 0.7rem 1rem;
+    background: linear-gradient(135deg, #1a1a2e, #302b63);
+    color: #fff;
+    border: none;
+    border-radius: 12px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.ts-btn-details:hover {
+    background: linear-gradient(135deg, #302b63, #667eea);
+    color: #fff;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(48, 43, 99, 0.35);
+}
+
+.ts-btn-details i {
+    font-size: 0.8rem;
+    transition: transform 0.3s ease;
+}
+
+.ts-btn-details:hover i {
+    transform: translateX(3px);
+}
+
+/* --- Responsive --- */
+@media (max-width: 991.98px) {
+    .ts-search {
+        width: 100%;
+        margin-bottom: 0.5rem;
+    }
+
+    .ts-search:focus {
+        width: 100%;
+    }
+
+    .ts-select {
+        width: 100%;
+        margin-bottom: 0.5rem;
+    }
+
+    .filter-divider {
+        display: none;
+    }
+
+    .nav-filter-row {
+        flex-direction: column;
+        gap: 0.5rem !important;
+    }
+
+    .nav-actions {
+        margin-top: 0.75rem;
+    }
+}
