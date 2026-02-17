@@ -107,4 +107,119 @@ public class DispositivoDAO {
             e.printStackTrace();
         }
     }
+
+    // Metodo para búsqueda dinámica
+    public List<Dispositivo> filtrar(String textoBusqueda, String marcaId, String categoriaId) {
+        List<Dispositivo> dispositivos = new ArrayList<>();
+
+        // 1.  concatenar condiciones fácilmente
+        StringBuilder sql = new StringBuilder("SELECT * FROM dispositivos WHERE 1=1");
+        List<Object> parametros = new ArrayList<>();
+
+        // 2. Agregar condiciones dinámicamente
+        if (textoBusqueda != null && !textoBusqueda.trim().isEmpty()) {
+            sql.append(" AND nombre LIKE ?");
+            parametros.add("%" + textoBusqueda + "%"); // Búsqueda parcial
+        }
+
+        if (marcaId != null && !marcaId.isEmpty() && !marcaId.equals("0")) {
+            sql.append(" AND marca_id = ?");
+            parametros.add(Integer.parseInt(marcaId));
+        }
+
+        if (categoriaId != null && !categoriaId.isEmpty() && !categoriaId.equals("0")) {
+            sql.append(" AND categoria_id = ?");
+            parametros.add(Integer.parseInt(categoriaId));
+        }
+
+        // Ordenar por fecha
+        sql.append(" ORDER BY fecha_lanzamiento DESC");
+
+        // 3. Ejecutar consulta
+        try (Connection conn = DatabaseConnection.getInstance();
+             PreparedStatement stmt = conn.prepareStatement(sql.toString())) {
+
+            // Asignar los ? del PreparedStatement
+            for (int i = 0; i < parametros.size(); i++) {
+                stmt.setObject(i + 1, parametros.get(i));
+            }
+
+            try (ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
+                    Dispositivo d = new Dispositivo();
+                    d.setId(rs.getInt("id"));
+                    d.setNombre(rs.getString("nombre"));
+                    d.setDescripcion(rs.getString("descripcion"));
+                    d.setImagenUrl(rs.getString("imagen_url"));
+                    d.setPrecio(rs.getDouble("precio"));
+                    d.setFechaLanzamiento(rs.getDate("fecha_lanzamiento"));
+                    d.setEspecificaciones(rs.getString("especificaciones"));
+                    d.setCategoriaId(rs.getInt("categoria_id"));
+                    d.setMarcaId(rs.getInt("marca_id"));
+                    dispositivos.add(d);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return dispositivos;
+    }
+
+    // 1. INSERTAR (Crear nuevo)
+    public boolean insertar(Dispositivo d) {
+        String sql = "INSERT INTO dispositivos (nombre, descripcion, imagen_url, precio, fecha_lanzamiento, especificaciones, categoria_id, marca_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        try (Connection conn = DatabaseConnection.getInstance();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setString(1, d.getNombre());
+            stmt.setString(2, d.getDescripcion());
+            stmt.setString(3, d.getImagenUrl());
+            stmt.setDouble(4, d.getPrecio());
+            stmt.setDate(5, (Date) d.getFechaLanzamiento()); // java.sql.Date
+            stmt.setString(6, d.getEspecificaciones());
+            stmt.setInt(7, d.getCategoriaId());
+            stmt.setInt(8, d.getMarcaId());
+
+            return stmt.executeUpdate() > 0;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    // 2. ACTUALIZAR (Editar existente)
+    public boolean actualizar(Dispositivo d) {
+        String sql = "UPDATE dispositivos SET nombre=?, descripcion=?, imagen_url=?, precio=?, fecha_lanzamiento=?, especificaciones=?, categoria_id=?, marca_id=? WHERE id=?";
+        try (Connection conn = DatabaseConnection.getInstance();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setString(1, d.getNombre());
+            stmt.setString(2, d.getDescripcion());
+            stmt.setString(3, d.getImagenUrl());
+            stmt.setDouble(4, d.getPrecio());
+            stmt.setDate(5, (Date) d.getFechaLanzamiento());
+            stmt.setString(6, d.getEspecificaciones());
+            stmt.setInt(7, d.getCategoriaId());
+            stmt.setInt(8, d.getMarcaId());
+            stmt.setInt(9, d.getId()); // El ID va al final en el WHERE
+
+            return stmt.executeUpdate() > 0;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    // 3. ELIMINAR
+    public boolean eliminar(int id) {
+        String sql = "DELETE FROM dispositivos WHERE id=?";
+        try (Connection conn = DatabaseConnection.getInstance();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, id);
+            return stmt.executeUpdate() > 0;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
 }

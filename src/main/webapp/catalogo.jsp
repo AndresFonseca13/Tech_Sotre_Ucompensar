@@ -20,43 +20,48 @@
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
     <div class="container">
-        <a class="navbar-brand" href="#">TechStore</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <a class="navbar-brand" href="catalogo">TechStore</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navFilters">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav me-auto">
+
+        <div class="collapse navbar-collapse" id="navFilters">
+            <form action="catalogo" method="get" class="d-lg-flex w-100 align-items-center gap-2">
+                <input class="form-control me-2" type="search" name="q" placeholder="Buscar..." value="${paramBusqueda}">
+
+                <select class="form-select me-2" name="marca" style="max-width: 150px;">
+                    <option value="0">Todas las Marcas</option>
+                    <c:forEach var="m" items="${listaMarcas}">
+                        <option value="${m.id}" ${paramMarca == String.valueOf(m.id) ? 'selected' : ''}>
+                                ${m.nombre}
+                        </option>
+                    </c:forEach>
+                </select>
+
+                <select class="form-select me-2" name="tipo" style="max-width: 150px;">
+                    <option value="0">Todos los Tipos</option>
+                    <c:forEach var="cat" items="${listaCategorias}">
+                        <option value="${cat.id}" ${paramTipo == String.valueOf(cat.id) ? 'selected' : ''}>
+                                ${cat.nombre}
+                        </option>
+                    </c:forEach>
+                </select>
+
+                <button class="btn btn-outline-success" type="submit">Filtrar</button>
+                <a href="catalogo" class="btn btn-outline-secondary ms-1">Limpiar</a>
+            </form>
+
+            <ul class="navbar-nav ms-3">
                 <li class="nav-item">
-                    <a class="nav-link active" href="catalogo">Catálogo</a>
+                    <a class="btn btn-danger btn-sm" href="admin">⚙️ Admin</a>
                 </li>
             </ul>
-            <form class="d-flex">
-                <input class="form-control me-2" type="search" placeholder="Buscar dispositivo..." aria-label="Search">
-                <button class="btn btn-outline-success" type="button">Buscar</button>
-            </form>
         </div>
     </div>
 </nav>
 
 <div class="container">
     <h1 class="text-center mb-4">Nuestros Dispositivos</h1>
-
-    <div class="row mb-4">
-        <div class="col-md-3">
-            <select class="form-select">
-                <option selected>Todas las Marcas</option>
-                <option value="1">Samsung</option>
-                <option value="2">Apple</option>
-            </select>
-        </div>
-        <div class="col-md-3">
-            <select class="form-select">
-                <option selected>Todos los Tipos</option>
-                <option value="1">Celulares</option>
-                <option value="2">Portátiles</option>
-            </select>
-        </div>
-    </div>
 
     <div class="row row-cols-1 row-cols-md-3 g-4">
         <c:forEach var="d" items="${dispositivos}">

@@ -1,6 +1,8 @@
 package com.store.tienda_fonsi_tech.controller;
 
+import com.store.tienda_fonsi_tech.dao.CategoriaDAO;
 import com.store.tienda_fonsi_tech.dao.DispositivoDAO;
+import com.store.tienda_fonsi_tech.dao.MarcaDAO;
 import com.store.tienda_fonsi_tech.model.Dispositivo;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -16,28 +18,57 @@ import java.util.List;
 public class DispositivoServlet extends HttpServlet {
 
     private DispositivoDAO dispositivoDAO;
+    private CategoriaDAO categoriaDAO;
+    private MarcaDAO marcaDAO;
+
 
     @Override
-    public void init() throws ServletException {
-        // Inicializamos el DAO una sola vez
+    public void init() {
         dispositivoDAO = new DispositivoDAO();
+        categoriaDAO = new CategoriaDAO();
+        marcaDAO = new MarcaDAO();
     }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        try {
-            // 1. Obtenemos la lista de la base de datos
-            List<Dispositivo> lista = dispositivoDAO.listarDispositivos();
 
-            // 2. Guardamos la lista en el request para pasarla al JSP
+        request.setAttribute("listaCategorias", categoriaDAO.listar());
+        request.setAttribute("listaMarcas", marcaDAO.listar());
+
+        try {
+            // Recibimos los parámetros del formulario HTML
+            String busqueda = request.getParameter("q");      // q = query (texto)
+            String marca = request.getParameter("marca");     // id de marca
+            String categoria = request.getParameter("tipo");  // id de categoria
+
+            List<Dispositivo> lista;
+
+            // Si hay algún filtro, usamos el metodo de búsqueda
+            if ((busqueda != null && !busqueda.isEmpty()) ||
+                    (marca != null && !marca.equals("0")) ||
+                    (categoria != null && !categoria.equals("0"))) {
+
+                lista = dispositivoDAO.filtrar(busqueda, marca, categoria);
+
+            } else {
+                // Si no hay filtros, traemos todo
+                lista = dispositivoDAO.listarDispositivos();
+            }
+
             request.setAttribute("dispositivos", lista);
 
-            // 3. Redirigimos a la vista (JSP)
+            // Reenviamos los parámetros para mantener los filtros seleccionados en la vista
+            request.setAttribute("paramBusqueda", busqueda);
+            request.setAttribute("paramMarca", marca);
+            request.setAttribute("paramTipo", categoria);
+
             request.getRequestDispatcher("catalogo.jsp").forward(request, response);
 
         } catch (Exception e) {
             e.printStackTrace();
-            response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Error al obtener datos: " + e.getMessage());
+            response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Error: " + e.getMessage());
         }
     }
+
+
 }
