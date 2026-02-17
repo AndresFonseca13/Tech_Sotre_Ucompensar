@@ -66,7 +66,7 @@ El sistema utiliza una base de datos relacional MySQL normalizada.
 
 ### Diagrama Entidad-Relación (MER)
 
-![Diagrama ER](ruta_de_tu_imagen_diagrama.png)
+<img width="467" height="755" alt="image" src="https://github.com/user-attachments/assets/291d6187-414f-42c6-a2e7-12bf9b5a8e14" />
 
 > *Nota: El script de inicialización `init.sql` incluye la estructura completa y 15 productos de prueba (Seed Data).*
 
